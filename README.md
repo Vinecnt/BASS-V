@@ -7,3 +7,6 @@ PROPOSAL LINK: https://docs.google.com/document/d/1tu1lnvw8SMuiaPJ2-loi_Nt5id-kI
 Vince is the WORST..... jk
 
 https://github.com/Vinecnt/BASS-V/invitations
+
+
+Shivi
