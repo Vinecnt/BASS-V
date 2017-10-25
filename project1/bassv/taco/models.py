@@ -1,5 +1,4 @@
 from django.db import models
-
 # Create your models here.
 class Assignments(models.Model):
     """
@@ -30,5 +29,37 @@ class AssignmentCommunication(models.Model):
 	PROFESSOR ID
 	"""
 	aid= models.ForeignKey('Assignments',on_delete=models.SET_NULL, null=True)
+	tid= models.ForeignKey('TA',on_delete=models.SET_NULL, null=True)
+	pid= models.ForeignKey('Professor',on_delete=models.SET_NULL, null=True)
+
+class Course(models.Model):
+	# unique id for each assignment 
+    cid = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="Unique ID for the Course")
+    cname= models.CharField(max_length=200, help_text="Enter Course Name")
+
+class TA(models.Model):
+	# unique id for each assignment 
+    tid = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="Unique ID for the TA")
+    tname= models.CharField(max_length=200, help_text="Enter First Name")
+
+class Professor(models.Model):
+	pid= models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="Unique ID for the Professor")
+    pname= models.CharField(max_length=200, help_text="Enter Professor's Name")
+
+class CourseOffering(models.Model):
+	cid=models.ForeignKey('Course',on_delete=models.SET_NULL, null=True)
+	tid= models.ForeignKey('TA',on_delete=models.SET_NULL, null=True)
+	pid= models.ForeignKey('Professor',on_delete=models.SET_NULL, null=True)
+
+class Message(models.Model):
+	mid= models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="Unique ID for the Message")
+	mstring= models.CharField(max_length=200, help_text="Enter the Message")
+
+class MessageCommunication(models.Model):
+	# I dont know how to reference two foreign keys to the same attribute so to make 
+	# it easier for the time being we just have TA and PID 
+	# also worst come worst we can hard code what we want our application to do
+	
+	mid=models.ForeignKey('Message',on_delete=models.SET_NULL, null=True)
 	tid= models.ForeignKey('TA',on_delete=models.SET_NULL, null=True)
 	pid= models.ForeignKey('Professor',on_delete=models.SET_NULL, null=True)
