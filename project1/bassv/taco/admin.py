@@ -15,43 +15,43 @@ from .models import Assignments, AssignmentCommunication, Course, TA, Professor,
 #     model = Book
 #     extra = 0
 #
-# @admin.register(Assignments)
-# class AssignmentAdmin(admin.ModelAdmin):
-#     pass
-#
-#
-# @admin.register(AssignmentCommunication)
-# class AssignmentCommunicationAdmin(admin.ModelAdmin):
-#     pass
-#
-# # admin.site.register(BookInstance)
-# #
-# # # Register the Admin classes for Book using the decorator
-# #
-#
-# # Register the Admin classes for BookInstance using the decorator
-#
-# @admin.register(Course)
-# class CourseAdmin(admin.ModelAdmin):
-#     pass
-#
-# @admin.register(CourseOffering)
-# class CourseOfferingAdmin(admin.ModelAdmin):
-#     pass
-#
-# @admin.register(Message)
-# class MessageAdmin(admin.ModelAdmin):
-#     pass
-#
-# @admin.register(MessageCommunication)
-# class MessageCommunication(admin.ModelAdmin):
-#     pass
+@admin.register(Assignments)
+class AssignmentAdmin(admin.ModelAdmin):
+    list_display =  ('aid','aname')
 
-admin.site.register(AssignmentCommunication)
-admin.site.register(Assignments)
-admin.site.register(Course)
-admin.site.register(TA)
-admin.site.register(Professor)
-admin.site.register(CourseOffering)
-admin.site.register(MessageCommunication)
-admin.site.register(Message)
+
+@admin.register(AssignmentCommunication)
+class AssignmentCommunicationAdmin(admin.ModelAdmin):
+    pass
+
+# admin.site.register(BookInstance)
+#
+# # Register the Admin classes for Book using the decorator
+#
+
+# Register the Admin classes for BookInstance using the decorator
+
+@admin.register(Course)
+class CourseAdmin(admin.ModelAdmin):
+    pass
+
+@admin.register(CourseOffering)
+class CourseOfferingAdmin(admin.ModelAdmin):
+    pass
+
+@admin.register(Message)
+class MessageAdmin(admin.ModelAdmin):
+    pass
+
+@admin.register(MessageCommunication)
+class MessageCommunication(admin.ModelAdmin):
+    pass
+
+# admin.site.register(AssignmentCommunication)
+# admin.site.register(Assignments)
+# admin.site.register(Course)
+# admin.site.register(TA)
+# admin.site.register(Professor)
+# admin.site.register(CourseOffering)
+# admin.site.register(MessageCommunication)
+# admin.site.register(Message)
