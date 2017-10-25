@@ -38,13 +38,43 @@ class Course(models.Model):
     cname= models.CharField(max_length=200, help_text="Enter Course Name")
 
 class TA(models.Model):
-	# unique id for each assignment 
+	# unique id for each assignment
     tid = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="Unique ID for the TA")
-    tname= models.CharField(max_length=200, help_text="Enter First Name")
+    tname = models.CharField(max_length=200, help_text="Enter First Name")
+    courseOfferingID = models.ManyToManyField(Course, help_text="Select a course assigned to TA")
+
+    def display_course(self):
+        """
+        Creates a string for the courses. This is required to display courses for TA.
+        """
+        return ', '.join([ courseOfferingID.name for courseOfferingID in self.courseOfferingID.all()[:3] ])
+        display_course.short_description = 'Courses assigned to this TA'
+
+    def __str__(self):
+        """
+        String for representing the Model object.
+        Returns the name of the TA and their unique ID.
+        """
+        return '%s, %s' % (self.tname, self.tid)
 
 class Professor(models.Model):
-	pid= models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="Unique ID for the Professor")
-    pname= models.CharField(max_length=200, help_text="Enter Professor's Name")
+    pid = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="Unique ID for the Professor")
+    pname = models.CharField(max_length=200, help_text="Enter Professor's Name")
+    courseOfferingID = models.ManyToManyField(Course, help_text="Select a course by this Professor")
+
+    def display_course(self):
+        """
+        Creates a string for the courses. This is required to display courses in Admin.
+        """
+        return ', '.join([ courseOfferingID.name for courseOfferingID in self.courseOfferingID.all()[:3] ])
+        display_course.short_description = 'Courses taught by this Professor'
+
+    def __str__(self):
+        """
+        String for representing the Model object.
+        Returns the name of the professor and their unique ID.
+        """
+        return '%s, %s' % (self.pname, self.id)
 
 class CourseOffering(models.Model):
 	cid=models.ForeignKey('Course',on_delete=models.SET_NULL, null=True)
