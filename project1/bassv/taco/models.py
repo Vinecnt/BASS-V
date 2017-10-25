@@ -1,4 +1,6 @@
 from django.db import models
+import uuid  # Required for unique book instances
+
 # Create your models here.
 class Assignments(models.Model):
     """
