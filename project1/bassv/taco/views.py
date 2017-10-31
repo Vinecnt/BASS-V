@@ -14,13 +14,14 @@ def index(request):
     # num_authors = Author.objects.count()  # The 'all()' is implied by default.
 
     # Render the HTML template index.html with the data in the context variable
+    context = dict()
+    for item in class_iter:
+        context[str(item)] = item.cname
 
     return render(
         request,
         'index.html',
     #     context={'num_books': num_books, 'num_instances': num_instances,
     #              'num_instances_available': num_instances_available, 'num_authors': num_authors},
-        for item in class_iter:
-
-            context=(),
-    # )
+        context,
+    )
