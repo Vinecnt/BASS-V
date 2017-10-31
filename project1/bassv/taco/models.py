@@ -42,6 +42,8 @@ class Course(models.Model):
 	# unique id for each assignment
 	cid = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="Unique ID for the Course")
 	cname = models.CharField(max_length=200, help_text="Enter Course Name")
+	def __str__(self):
+		return self.cname
 
 
 class TA(models.Model):
