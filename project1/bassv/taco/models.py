@@ -82,7 +82,7 @@ class Professor(models.Model):
         String for representing the Model object.
         Returns the name of the professor and their unique ID.
         """
-		return '%s, %s' % (self.pname, self.id)
+		return '%s, %s' % (self.pname, self.pid)
 
 
 class CourseOffering(models.Model):
