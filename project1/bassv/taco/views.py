@@ -36,6 +36,3 @@ class CourseDetailView(generic.DetailView):
 
 class MessageListView(generic.ListView):
     model = Message
-
-class TAListView(generic.ListView):
-    model= TA

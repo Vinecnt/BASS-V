@@ -46,8 +46,3 @@ class CourseOfferingAdmin(admin.ModelAdmin):
 @admin.register(MessageCommunication)
 class MessageCommunicationAdmin(admin.ModelAdmin):
     list_display = ('mid','tid','pid')
-
-
-
-
-

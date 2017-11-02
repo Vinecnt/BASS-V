@@ -1,6 +1,6 @@
 from django.db import models
 import uuid
-
+from django.urls import reverse 
 # Create your models here.
 
 
@@ -43,8 +43,8 @@ class Course(models.Model):
 	cid = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="Unique ID for the Course")
 	cname = models.CharField(max_length=200, help_text="Enter Course Name")
 
-	def get_absolute_url(self):
-		return reverse('course-detail', args=[str(self.id)])
+	# def get_absolute_url(self):
+	# 	return reverse('course-detail', args=[str(self.id)])
 
 	def __str__(self):
 		return self.cname
@@ -56,12 +56,12 @@ class TA(models.Model):
 	tname = models.CharField(max_length=200, help_text="Enter First Name")
 	courseOfferingID = models.ManyToManyField(Course, help_text="Select a course assigned to TA")
 
-	def display_course(self):
-		"""
-        Creates a string for the courses. This is required to display courses for TA.
-        """
-		return ', '.join([courseOfferingID.name for courseOfferingID in self.courseOfferingID.all()[:3]])
-		display_course.short_description = 'Courses assigned to this TA'
+	# def display_course(self):
+	# 	"""
+    #     Creates a string for the courses. This is required to display courses for TA.
+    #     """
+	# 	return ', '.join([courseOfferingID.name for courseOfferingID in self.courseOfferingID.all()[:3]])
+	# 	display_course.short_description = 'Courses assigned to this TA'
 
 	# def get_absolute_url(self):
 	# 	return reverse('ta-detail', args=[str(self.id)])
@@ -115,4 +115,3 @@ class MessageCommunication(models.Model):
 	mid = models.ForeignKey('Message', on_delete=models.SET_NULL, null=True)
 	tid = models.ForeignKey('TA', on_delete=models.SET_NULL, null=True)
 	pid = models.ForeignKey('Professor', on_delete=models.SET_NULL, null=True)
-
