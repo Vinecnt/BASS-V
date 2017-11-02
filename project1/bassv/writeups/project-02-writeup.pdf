@@ -1,0 +1,61 @@
+Overview: A brief overview of your application. Please highlight any changes from your project proposal since the Project 1 submission.
+
+The taco application is an online tool for professors to manage their TAs(teacher’s assistants). 
+We have created the 2 views-for professors and TAs. where each of them will be able to see what tasks need to be done and the progress of them. The changes that we made are the notification part, we added another html page for it. We have minor changes in the models.py. We are still working on it to make it work with the design that we had.
+
+Team Members: Salem Couja, Ani Gevorgyan, Shivangi Singh, Vincent Tran, Brendon Delgado
+
+Github Repository: https://github.com/Vinecnt/BASS-V
+
+Design Overview: A brief design overview of your data model as implemented in Django, the important URL routes, and the implemented UI views.
+Our data model consists of 
+Messages- for storing the messages between the Professors and TA
+Courses- for storing the list of courses 
+TA- storing the list of Teaching Assistants
+Professors- storing a list of the professors
+Assignments (not used in the live page)- holds the links to the assignments. 
+
+Problems: We initially had problems getting the database to store our data, but were able to figure out the cause of the problem and solve it. We also had trouble getting certain views to show up properly. 
+Team communication wasn’t good, as everyone had different schedules and this couple weeks were interview weeks for majority of the group members. For our next project submission we should go to office hours sooner and more often to get help with problems so we don’t get stuck on them. 
+We also had problem having the detail view work. I’m assuming that is a problem connected to the models and the way we came up with our diagram for our database.
+
+Successes: We have the dashboard/main page working with the menu which redirects the user to the correct pages, however we can’t connect all the pages, because we need the multiuser option for that. We will be able to do it for our next submission.
+
+
+
+Individual Write Up:
+Shivangi: 
+Helped with the Brainstorming of the database. Classes required. 
+Initially wrote the models.py with the various classes required for our application.  
+Added a UI for TA on the left navigation bar. 
+Problem Faced: I couldn’t get the TA to connect to display what their classes were TAing.
+Added Mock Data
+Also, contributed to the write up
+Percentage Contribution- 35%
+
+
+Vincent:
+Helped everyone setting up their git
+Helped implementing the data models
+Created the superuser
+Helped implementing the url mapping
+Helped creating the skeleton for the website
+Helped implementing the templates
+Helped separating the base_generic.html from index.html
+Percentage contribution -40%
+
+Ani: 
+Helped implementing the data models
+Helped implementing the url mapping
+Helped creating the skeleton for the website
+Helped implementing the templates
+Created the url for CourseList and connected it to the view and template
+Helped separating the base_generic.html from index.html
+Percentage contribution -40%
+
+
+Salem:
+My contribution to the project submission includes creating the Mock data for the project, which includes (Professors, TA’s, Messages, Courses, etc.), I have also updated the Messages page and linked it to the database, which is accessible from the Dashboard (aka home page) and the side-bar. 35%
+
+Brendon: 
+My contribution to this project has been creating the TA and Professor models. I also tried to help with connecting the course detail/course offering pages and getting the views to work. Unfortunately I wasn’t able to figure it out, however. I also helped draft the team write up. Percentage contributed: 30%.
