@@ -32,3 +32,7 @@ class CourseListView(generic.ListView):
 
 class CourseDetailView(generic.DetailView):
     model = Course
+
+
+class MessageListView(generic.ListView):
+    model = Message

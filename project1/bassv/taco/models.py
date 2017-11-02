@@ -16,7 +16,7 @@ class Assignment(models.Model):
 	# foregin key to reference the course which the assifnment is for
 	cid = models.ForeignKey('Course', on_delete=models.SET_NULL, null=True)
 	# Assignment Name for referencing the assignment
-	aname = models.CharField(max_length=200, help_text="Entera name for the Assignment")
+	aname = models.CharField(max_length=200, help_text="Enter a name for the Assignment")
 
 	def __str__(self):
 		"""
@@ -96,6 +96,8 @@ class CourseOffering(models.Model):
 class Message(models.Model):
 	mid = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="Unique ID for the Message")
 	mstring = models.CharField(max_length=200, help_text="Enter the Message")
+	def __str__(self):
+		return self.mstring
 
 
 class MessageCommunication(models.Model):
@@ -106,3 +108,4 @@ class MessageCommunication(models.Model):
 	mid = models.ForeignKey('Message', on_delete=models.SET_NULL, null=True)
 	tid = models.ForeignKey('TA', on_delete=models.SET_NULL, null=True)
 	pid = models.ForeignKey('Professor', on_delete=models.SET_NULL, null=True)
+
