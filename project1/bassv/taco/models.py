@@ -42,6 +42,10 @@ class Course(models.Model):
 	# unique id for each assignment
 	cid = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="Unique ID for the Course")
 	cname = models.CharField(max_length=200, help_text="Enter Course Name")
+
+	def get_absolute_url(self):
+		return reverse('course-detail', args=[str(self.id)])
+
 	def __str__(self):
 		return self.cname
 
@@ -59,12 +63,15 @@ class TA(models.Model):
 		return ', '.join([courseOfferingID.name for courseOfferingID in self.courseOfferingID.all()[:3]])
 		display_course.short_description = 'Courses assigned to this TA'
 
+	# def get_absolute_url(self):
+	# 	return reverse('ta-detail', args=[str(self.id)])
+
 	def __str__(self):
 		"""
         String for representing the Model object.
         Returns the name of the TA and their unique ID.
         """
-		return '%s, %s' % (self.tname, self.tid)
+		return '%s' % (self.tname)
 
 
 class Professor(models.Model):
