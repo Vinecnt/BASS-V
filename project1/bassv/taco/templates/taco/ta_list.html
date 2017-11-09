@@ -1,0 +1,19 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Teaching Assistants: </h1>
+
+    {% if ta_list %}
+    <ul>
+
+      {% for ta in ta_list %}
+      <li>
+        <a href="{{ ta.get_absolute_url }}">{{ ta }}</a>
+      </li>
+      {% endfor %}
+
+    </ul>
+    {% else %}
+      <p>There are no Teaching Assistants Assigned.</p>
+    {% endif %}
+{% endblock %}
