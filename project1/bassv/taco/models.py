@@ -1,6 +1,6 @@
 from django.db import models
 import uuid
-from django.urls import reverse 
+from django.urls import reverse
 # Create your models here.
 
 
@@ -43,8 +43,8 @@ class Course(models.Model):
 	cid = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="Unique ID for the Course")
 	cname = models.CharField(max_length=200, help_text="Enter Course Name")
 
-	# def get_absolute_url(self):
-	# 	return reverse('course-detail', args=[str(self.id)])
+	def get_absolute_url(self):
+		 return reverse('course-detail', args=[str(self.cid)])
 
 	def __str__(self):
 		return self.cname
@@ -96,8 +96,14 @@ class Professor(models.Model):
 
 class CourseOffering(models.Model):
 	cid = models.ForeignKey('Course', on_delete=models.SET_NULL, null=True)
-	tid = models.ForeignKey('TA', on_delete=models.SET_NULL, null=True)
-	pid = models.ForeignKey('Professor', on_delete=models.SET_NULL, null=True)
+	#tid = models.ForeignKey('TA', on_delete=models.SET_NULL, null=True)
+#	pid = models.ForeignKey('Professor', on_delete=models.SET_NULL, null=True)
+	def __str__(self):
+		"""
+        String for representing the Model object.
+        Returns the name of the professor and their unique ID.
+        """
+		return '%s' % (self.cid)
 
 
 class Message(models.Model):

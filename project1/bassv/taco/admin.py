@@ -40,7 +40,7 @@ class ProfessorAdmin(admin.ModelAdmin):
 
 @admin.register(CourseOffering)
 class CourseOfferingAdmin(admin.ModelAdmin):
-    list_display = ('cid','tid','pid')
+    list_display = ('cid', 'cid')
 
 
 @admin.register(MessageCommunication)

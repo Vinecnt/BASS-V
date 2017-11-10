@@ -31,7 +31,7 @@ class CourseListView(generic.ListView):
     model = Course
 
 class CourseDetailView(generic.DetailView):
-    model = CourseOffering
+    model = Course
 
 
 class MessageListView(generic.ListView):
