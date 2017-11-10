@@ -42,6 +42,7 @@ class Course(models.Model):
 	# unique id for each assignment
 	cid = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="Unique ID for the Course")
 	cname = models.CharField(max_length=200, help_text="Enter Course Name")
+	cdescription=models.TextField(max_length=1000, help_text="Enter a brief description of the course")
 
 	def get_absolute_url(self):
 		 return reverse('course-detail', args=[str(self.cid)])

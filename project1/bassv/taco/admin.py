@@ -19,7 +19,7 @@ class MessageAdmin(admin.ModelAdmin):
 
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
-    list_display = ('cid','cname')
+    list_display = ('cid','cname','cdescription')
 
 @admin.register(TA)
 class TAADmin(admin.ModelAdmin):
