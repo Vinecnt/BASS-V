@@ -79,7 +79,7 @@ class Course(models.Model):
 		return self.cname
 
 	def display_ta(self):
-		return ', '.join([ ta.first_name for ta in self.ta.all()[:3] ])
+		return ', '.join([ ta.first_name for ta in self.ta.all()[:3]])
 		display_ta.short_description = 'Ta'
 
 
