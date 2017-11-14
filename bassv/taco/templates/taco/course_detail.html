@@ -133,31 +133,31 @@
                           <table class="table table-striped">
                               <thead>
                                   <tr>
-                                    <th>#</th>
-                                    <th>Task</th>
-                                    <th>Hours</th>
-                                    <th>Assigned TA</th>
+                                    <th bgcolor="#f8f8f8">Assigned TA</th>
+                                    {% for ta in course.ta.all %} <td>{{ ta.full_name }}</td> {% endfor %}
+                                      <!-- <th>#</th>
+                                      <th>Task</th>
+                                      <th>Hours</th>
+                                      <th>Assigned TA</th> -->
                                   </tr>
                               </thead>
                               <tbody>
                                   <tr>
-                                      <td>1</td>
-                                      <td>Grade quiz#2</td>
-                                      <td>4</td>
-                                      <td>Jacob Thornton</td>
+                                      <th bgcolor="#f8f8f8">Task</th>
+                                      <td>Grade quiz#1</td>
+                                      <td>Grade HW#1</td>
+                                      <td>Lead discussion#1</td>
+
+
                                   </tr>
                                   <tr>
-                                      <td>2</td>
-                                      <td>Grade HW#2</td>
+                                      <th bgcolor="#f8f8f8">Hours</th>
                                       <td>3</td>
-                                      <td>Mark Otto</td>
-                                  </tr>
-                                  <tr>
-                                      <td>3</td>
-                                      <td>Lead discussion#2</td>
                                       <td>2</td>
-                                      <td>Larry the Bird</td>
+                                      <td>7</td>
+
                                   </tr>
+                                 
                               </tbody>
                           </table>
                       </div>
