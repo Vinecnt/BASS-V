@@ -36,12 +36,12 @@ class AssignmentCommunication(models.Model):
 	aid = models.ForeignKey('Assignment', on_delete=models.SET_NULL, null=True)
 	# tid = models.ForeignKey('TA', on_delete=models.SET_NULL, null=True)
 	# pid = models.ForeignKey('Professor', on_delete=models.SET_NULL, null=True)
-	
+
 class Ta(models.Model):
 	# unique id for each assignment
 	tid = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="Unique ID for the TA")
-	first_name = models.CharField(max_length=200, help_text="Enter First Name")
-	last_name = models.CharField(max_length=200, help_text="Enter Last Name")
+	full_name = models.CharField(max_length=200, help_text="Enter Full Name")
+	# last_name = models.CharField(max_length=200, help_text="Enter Last Name")
 	# courseOfferingID = models.ManyToManyField(Course, help_text="Select a course assigned to TA")
 
 	# def display_course(self):
@@ -59,7 +59,7 @@ class Ta(models.Model):
         String for representing the Model object.
         Returns the name of the TA and their unique ID.
         """
-		return '%s, %s' % (self.first_name,self.last_name )
+		return '%s' % (self.full_name)
 
 
 
@@ -79,7 +79,7 @@ class Course(models.Model):
 		return self.cname
 
 	def display_ta(self):
-		return ', '.join([ ta.first_name for ta in self.ta.all()[:3]])
+		return ', '.join([ ta.full_name for ta in self.ta.all()[:3]])
 		display_ta.short_description = 'Ta'
 
 

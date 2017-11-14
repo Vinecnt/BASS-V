@@ -23,7 +23,7 @@ class CourseAdmin(admin.ModelAdmin):
 
 @admin.register(Ta)
 class TaADmin(admin.ModelAdmin):
-    list_display = ('tid','first_name','last_name')
+    list_display = ('tid','full_name')
 
 @admin.register(Assignment)
 class AssignmentAdmin(admin.ModelAdmin):
