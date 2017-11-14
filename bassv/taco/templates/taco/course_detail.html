@@ -5,6 +5,8 @@
       <div class="row">
           <div class="col-lg-12">
               <h1> Title: {{course.cname}}</h1>
+              <h2> Professor: {{course.professor}} </h2>
+              <h2> Ta: {% for ta in course.ta.all %} {{ ta.first_name }}{% if not forloop.last %}, {% endif %}{% endfor %} </h2>
           </div>
           <!-- /.col-lg-12 -->
       </div>

@@ -34,28 +34,15 @@ class AssignmentCommunication(models.Model):
 	PROFESSOR ID
 	"""
 	aid = models.ForeignKey('Assignment', on_delete=models.SET_NULL, null=True)
-	tid = models.ForeignKey('TA', on_delete=models.SET_NULL, null=True)
-	pid = models.ForeignKey('Professor', on_delete=models.SET_NULL, null=True)
-
-
-class Course(models.Model):
-	# unique id for each assignment
-	cid = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="Unique ID for the Course")
-	cname = models.CharField(max_length=200, help_text="Enter Course Name")
-	cdescription=models.TextField(max_length=1000, help_text="Enter a brief description of the course")
-
-	def get_absolute_url(self):
-		 return reverse('course-detail', args=[str(self.cid)])
-
-	def __str__(self):
-		return self.cname
-
-
-class TA(models.Model):
+	# tid = models.ForeignKey('TA', on_delete=models.SET_NULL, null=True)
+	# pid = models.ForeignKey('Professor', on_delete=models.SET_NULL, null=True)
+	
+class Ta(models.Model):
 	# unique id for each assignment
 	tid = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="Unique ID for the TA")
-	tname = models.CharField(max_length=200, help_text="Enter First Name")
-	courseOfferingID = models.ManyToManyField(Course, help_text="Select a course assigned to TA")
+	first_name = models.CharField(max_length=200, help_text="Enter First Name")
+	last_name = models.CharField(max_length=200, help_text="Enter Last Name")
+	# courseOfferingID = models.ManyToManyField(Course, help_text="Select a course assigned to TA")
 
 	# def display_course(self):
 	# 	"""
@@ -72,13 +59,39 @@ class TA(models.Model):
         String for representing the Model object.
         Returns the name of the TA and their unique ID.
         """
-		return '%s' % (self.tname)
+		return '%s, %s' % (self.first_name,self.last_name )
+
+
+
+
+class Course(models.Model):
+	# unique id for each assignment
+	cid = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="Unique ID for the Course")
+	cname = models.CharField(max_length=200, help_text="Enter Course Name")
+	cdescription=models.TextField(max_length=1000, help_text="Enter a brief description of the course")
+	professor=models.ForeignKey('Professor', on_delete=models.SET_NULL, null=True)
+	ta=models.ManyToManyField(Ta, help_text="Select a TA for this course")
+
+	def get_absolute_url(self):
+		 return reverse('course-detail', args=[str(self.cid)])
+
+	def __str__(self):
+		return self.cname
+
+	def display_ta(self):
+		return ', '.join([ ta.first_name for ta in self.ta.all()[:3] ])
+		display_ta.short_description = 'Ta'
+
+
+
+
+
 
 
 class Professor(models.Model):
 	pid = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="Unique ID for the Professor")
 	pname = models.CharField(max_length=200, help_text="Enter Professor's Name")
-	courseOfferingID = models.ManyToManyField(Course, help_text="Select a course by this Professor")
+	# courseOfferingID = models.ManyToManyField(Course, help_text="Select a course by this Professor")
 
 	def display_course(self):
 		"""
@@ -92,7 +105,8 @@ class Professor(models.Model):
         String for representing the Model object.
         Returns the name of the professor and their unique ID.
         """
-		return '%s, %s' % (self.pname, self.pid)
+		return '%s' % (self.pname)
+
 
 
 class CourseOffering(models.Model):
@@ -120,5 +134,5 @@ class MessageCommunication(models.Model):
 	# also worst come worst we can hard code what we want our application to do
 
 	mid = models.ForeignKey('Message', on_delete=models.SET_NULL, null=True)
-	tid = models.ForeignKey('TA', on_delete=models.SET_NULL, null=True)
-	pid = models.ForeignKey('Professor', on_delete=models.SET_NULL, null=True)
+	# tid = models.ForeignKey('TA', on_delete=models.SET_NULL, null=True)
+	# pid = models.ForeignKey('Professor', on_delete=models.SET_NULL, null=True)
