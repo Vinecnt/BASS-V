@@ -37,6 +37,23 @@
 </head>
 
 <body>
+      {%load static %}
+    <!-- jQuery -->
+    <script src="{% static 'css/vendor/jquery/jquery.min.js' %}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static 'css/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="{% static 'css/vendor/metisMenu/metisMenu.min.js' %}"></script>
+
+    <!-- Morris Charts JavaScript -->
+    <script src="{% static 'css/vendor/raphael/raphael.min.js' %}"></script>
+    <script src="{% static 'css/vendor/morrisjs/morris.min.js' %}"></script>
+    <script src="{% static 'css/data/morris-data.js' %}"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="{% static 'css/dist/js/sb-admin-2.js' %}"></script>
 
     <div id="wrapper">
 
@@ -71,13 +88,13 @@
 
                 <!-- /.dropdown -->
                 <li class="dropdown">
-                    <a  class="dropdown-toggle" data-toggle="dropdown">
+                    <a  class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-bell fa-fw"></i>
                         <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-alerts">
                         <li>
-                            <a href="#">
+                            <a class="dropdown-toggle" href="#">
                                 <div>
                                     <i class="fa fa-comment fa-fw"></i> New Comment
                                     <span class="pull-right text-muted small">4 minutes ago</span>
@@ -147,14 +164,29 @@
                        {% endif %} -->
 
 
-                        <li>
+                        <li class="">
                             <a href="{% url 'index' %}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
-                        <li>
-                            <a href="{% url 'courses' %}"><i class="fa fa-bar-chart-o fa-fw"></i>Classes</a>
+                        <li class="">
+                            <a href="{% url 'courses' %}"><i class="fa fa-bar-chart-o fa-fw"></i>Classes<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse" aria-expanded="false" >
+                                <!-- <li><a href="{% url 'courses' %}">something</a></li> -->
+                                <li><a href="{% url 'courses' %}">Original courses page</a></li>
+                                {% if course_list %}
+
+                                  {% for course in course_list %}
+                                  <li>
+                                    <a href="{{ course.get_absolute_url }}">{{ course}}</a>
+                                  </li>
+                                  {% endfor %}
+
+                                {% else %}
+                                  <p>There are no courses available.</p>
+                                {% endif %}
+                            </ul>
                         </li>
                         <li>
-                            <a href="{% url 'messages' %}"><i class="fa fa-bar-chart-o fa-fw"></i>Messages</a>
+                            <a href="{% url 'update' %}"><i class="fa fa-bar-chart-o fa-fw"></i>Updates</a>
                         </li>
 
                             <!-- /.nav-second-level -->
@@ -179,23 +211,7 @@
 
     </div>
     <!-- /#wrapper -->
-    {%load static %}
-    <!-- jQuery -->
-    <script src="{% static 'css/vendor/jquery/jquery.min.js' %}"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="{% static 'css/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
-
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="{% static 'css/vendor/metisMenu/metisMenu.min.js' %}"></script>
-
-    <!-- Morris Charts JavaScript -->
-    <script src="{% static 'css/vendor/raphael/raphael.min.js' %}"></script>
-    <script src="{% static 'css/vendor/morrisjs/morris.min.js' %}"></script>
-    <script src="{% static 'css/data/morris-data.js' %}"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script src="{% static 'css/dist/js/sb-admin-2.js' %}"></script>
+  
 
 </body>
 
