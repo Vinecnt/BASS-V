@@ -129,9 +129,9 @@ class Update(models.Model):
 	def __str__(self):
 		return self.ustring
 
-	def display_course(self):
-		return ', '.join([ desiredCourse.cname for desiredCourse in self.desiredCourse.all()[:3]])
-		display_course.short_description = 'Course'
+	# def display_course(self):
+	# 	return ', '.join([ desiredCourse.cname for desiredCourse in self.desiredCourse.all()[:3]])
+	# 	display_course.short_description = 'Course'
 
 # class MessageCommunication(models.Model):
 # 	# I dont know how to reference two foreign keys to the same attribute so to make
