@@ -19,7 +19,7 @@ class UpdateAdmin(admin.ModelAdmin):
 
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
-    list_display = ('cid','cname','cdescription','professor','display_ta')
+    list_display = ('cname','cdescription','professor','display_ta')
 
 @admin.register(Ta)
 class TaADmin(admin.ModelAdmin):
@@ -37,8 +37,7 @@ class AssignmentCommunicationAdmin(admin.ModelAdmin):
 
 @admin.register(Professor)
 class ProfessorAdmin(admin.ModelAdmin):
-    # list_display = ('pid','pname')
-    pass
+    list_display = ('pid','pname')
 
 @admin.register(CourseOffering)
 class CourseOfferingAdmin(admin.ModelAdmin):

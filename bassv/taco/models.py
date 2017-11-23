@@ -1,7 +1,10 @@
 from django.db import models
 import uuid
 from django.urls import reverse
+from django.contrib.auth.models import User
 # Create your models here.
+
+
 
 
 class Assignment(models.Model):
@@ -42,7 +45,7 @@ class Ta(models.Model):
 	tid = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="Unique ID for the TA")
 	full_name = models.CharField(max_length=200, help_text="Enter Full Name")
 	# last_name = models.CharField(max_length=200, help_text="Enter Last Name")
-	# courseOfferingID = models.ManyToManyField(Course, help_text="Select a course assigned to TA")
+
 
 	# def display_course(self):
 	# 	"""
