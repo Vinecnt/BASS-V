@@ -1,0 +1,20 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Update List</h1>
+
+    {% if update_list %}
+    <ul>
+
+      {% for update in update_list %}
+      <li>
+        <a>{{ update }}</a>
+
+      </li>
+      {% endfor %}
+
+    </ul>
+    {% else %}
+      <p>There are no new updates available.</p>
+    {% endif %}
+{% endblock %}

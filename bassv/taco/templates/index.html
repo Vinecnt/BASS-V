@@ -1,5 +1,6 @@
 {% extends "base_generic.html" %}
 
+
 {% block content %}
 <div class="row">
     <div class="col-lg-4 col-md-6">
@@ -11,13 +12,13 @@
                     </div>
                     <div class="col-xs-9 text-right">
                         <div class="huge"></div>
-                        <div>Messages!</div>
+                        <div>Updates!</div>
                     </div>
                 </div>
             </div>
-            <a href="{% url 'messages' %}">
+            <a href="{% url 'update' %}">
                 <div class="panel-footer">
-                    <span class="pull-left">View Messages</span>
+                    <span class="pull-left">View Updates</span>
                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                     <div class="clearfix"></div>
                 </div>

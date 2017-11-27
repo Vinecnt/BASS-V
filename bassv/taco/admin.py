@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Message, Course, AssignmentCommunication, Assignment, Ta, Professor, CourseOffering, MessageCommunication
+from .models import Update, Course, AssignmentCommunication, Assignment, Ta, Professor, CourseOffering
 
 # admin.site.register(Message)
 # admin.site.register(Course)
@@ -13,13 +13,13 @@ from .models import Message, Course, AssignmentCommunication, Assignment, Ta, Pr
 # admin.site.register(MessageCommunication)
 
 
-@admin.register(Message)
-class MessageAdmin(admin.ModelAdmin):
-    list_display = ('mid','mstring')
+@admin.register(Update)
+class UpdateAdmin(admin.ModelAdmin):
+    list_display = ('uid','ustring')
 
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
-    list_display = ('cid','cname','cdescription','professor','display_ta')
+    list_display = ('cname','cdescription','professor','display_ta')
 
 @admin.register(Ta)
 class TaADmin(admin.ModelAdmin):
@@ -37,8 +37,7 @@ class AssignmentCommunicationAdmin(admin.ModelAdmin):
 
 @admin.register(Professor)
 class ProfessorAdmin(admin.ModelAdmin):
-    # list_display = ('pid','pname')
-    pass
+    list_display = ('pid','pname')
 
 @admin.register(CourseOffering)
 class CourseOfferingAdmin(admin.ModelAdmin):
@@ -46,7 +45,7 @@ class CourseOfferingAdmin(admin.ModelAdmin):
     pass
 
 
-@admin.register(MessageCommunication)
-class MessageCommunicationAdmin(admin.ModelAdmin):
-    # list_display = ('mid','tid','pid')
-    pass
+# @admin.register(MessageCommunication)
+# class MessageCommunicationAdmin(admin.ModelAdmin):
+#     # list_display = ('mid','tid','pid')
+#     pass

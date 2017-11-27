@@ -1,7 +1,10 @@
 from django.db import models
 import uuid
 from django.urls import reverse
+from django.contrib.auth.models import User
 # Create your models here.
+
+
 
 
 class Assignment(models.Model):
@@ -42,7 +45,7 @@ class Ta(models.Model):
 	tid = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="Unique ID for the TA")
 	full_name = models.CharField(max_length=200, help_text="Enter Full Name")
 	# last_name = models.CharField(max_length=200, help_text="Enter Last Name")
-	# courseOfferingID = models.ManyToManyField(Course, help_text="Select a course assigned to TA")
+
 
 	# def display_course(self):
 	# 	"""
@@ -121,18 +124,23 @@ class CourseOffering(models.Model):
 		return '%s' % (self.cid)
 
 
-class Message(models.Model):
-	mid = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="Unique ID for the Message")
-	mstring = models.CharField(max_length=200, help_text="Enter the Message")
+class Update(models.Model):
+	uid = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="Unique ID for the Update")
+	ustring = models.CharField(max_length=200, help_text="Enter the Update")
+	desiredCourse = models.ManyToManyField(Course, help_text="Select a course that you would like to update its TA's")
+
 	def __str__(self):
-		return self.mstring
+		return self.ustring
 
+	# def display_course(self):
+	# 	return ', '.join([ desiredCourse.cname for desiredCourse in self.desiredCourse.all()[:3]])
+	# 	display_course.short_description = 'Course'
 
-class MessageCommunication(models.Model):
-	# I dont know how to reference two foreign keys to the same attribute so to make
-	# it easier for the time being we just have TA and PID
-	# also worst come worst we can hard code what we want our application to do
+# class MessageCommunication(models.Model):
+# 	# I dont know how to reference two foreign keys to the same attribute so to make
+# 	# it easier for the time being we just have TA and PID
+# 	# also worst come worst we can hard code what we want our application to do
 
-	mid = models.ForeignKey('Message', on_delete=models.SET_NULL, null=True)
-	# tid = models.ForeignKey('TA', on_delete=models.SET_NULL, null=True)
-	# pid = models.ForeignKey('Professor', on_delete=models.SET_NULL, null=True)
+# 	mid = models.ForeignKey('Message', on_delete=models.SET_NULL, null=True)
+# 	# tid = models.ForeignKey('TA', on_delete=models.SET_NULL, null=True)
+# 	# pid = models.ForeignKey('Professor', on_delete=models.SET_NULL, null=True)
