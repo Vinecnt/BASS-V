@@ -1,7 +1,13 @@
 from django.shortcuts import render
 from .models import *
 from django.views import generic
+from django.contrib.auth.views import login
 
+def custom_login(request):
+    if request.user.is_authenticated():
+        return HttpResponseRedirect()
+    else:
+        return login(request)
 
 # Create your views here.
 def index(request):

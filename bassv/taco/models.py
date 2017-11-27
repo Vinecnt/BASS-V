@@ -10,7 +10,6 @@ from django.contrib.auth.models import User
 class Assignment(models.Model):
 	"""
     int for AID, String
-    Model representing a book genre (e.g. Science Fiction, Non Fiction).
     """
 	# unique id for each assignment
 	aid = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="Unique ID for the Assignment")
