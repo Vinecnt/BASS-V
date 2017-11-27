@@ -44,6 +44,7 @@ class Ta(models.Model):
 	# unique id for each assignment
 	tid = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="Unique ID for the TA")
 	full_name = models.CharField(max_length=200, help_text="Enter Full Name")
+	assignment = models.ForeignKey('Assignment', on_delete=models.SET_NULL, null=True)
 	# last_name = models.CharField(max_length=200, help_text="Enter Last Name")
 
 
@@ -74,6 +75,7 @@ class Course(models.Model):
 	cdescription=models.TextField(max_length=1000, help_text="Enter a brief description of the course")
 	professor=models.ForeignKey('Professor', on_delete=models.SET_NULL, null=True)
 	ta=models.ManyToManyField(Ta, help_text="Select a TA for this course")
+	#assignment = models.ManyToManyField(Assignment, help_text="pick an assignment for the course")
 
 	def get_absolute_url(self):
 		 return reverse('course-detail', args=[str(self.cid)])
