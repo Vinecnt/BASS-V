@@ -1,15 +1,17 @@
 from django.shortcuts import render
 from .models import *
 from django.views import generic
-from django.contrib.auth.views import login
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
-def custom_login(request):
-    if request.user.is_authenticated():
-        return HttpResponseRedirect()
-    else:
-        return login(request)
+# def custom_login(request):
+#     if request.user.is_authenticated():
+#         return HttpResponseRedirect()
+#     else:
+#         return login(request)
 
 # Create your views here.
+@login_required
 def index(request):
     """
     View function for home page of site.
@@ -35,12 +37,12 @@ def index(request):
         context,
     )
 
-class CourseListView(generic.ListView):
+class CourseListView(LoginRequiredMixin, generic.ListView):
     model = Course
 
-class CourseDetailView(generic.DetailView):
+class CourseDetailView(LoginRequiredMixin, generic.DetailView):
     model = Course
 
 
-class UpdateListView(generic.ListView):
+class UpdateListView(LoginRequiredMixin, generic.ListView):
     model = Update
