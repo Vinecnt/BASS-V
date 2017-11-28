@@ -185,23 +185,31 @@
                                 <div>
                                     <iframe src="{% url 'courses' %}" name="courses" allowTransparency="true" scrolling="yes" frameborder="0" hidden="true" >
                                     </iframe>
-                                        {% if course_list %}
-                                        <ul>
-                                        {% for course in course_list %}
-                                      <li>
-                                        <a href="{{ course.get_absolute_url }}">{{ course.cname}}</a>
-                                      </li>
-                                      {% endfor %}
-                                    </ul>
-                                    {% else %}
-                                      <p>There are no courses available.</p>
-                                    {% endif %}
+
+                                    <ul>
+                                            {% for course in course_list %}
+                                            <li><a href="{{ course.get_absolute_url }}">{{ course.cname}}</a></li>
+                                            {% endfor %}
+                                     </ul>
                                 </div>
                                   <!-- {% for course in course_list %}
                                   <li>
                                     <a href="{{ course.get_absolute_url }}">{{ course}}</a>
                                   </li>
                                   {% endfor %} -->
+                                  <!---->
+
+                                        <!--{% if course_list %}-->
+                                        <!--<ul>-->
+                                        <!--{% for course in course_list %}-->
+                                      <!--<li>-->
+                                        <!--<a href="{{ course.get_absolute_url }}">{{ course.cname}}</a>-->
+                                      <!--</li>-->
+                                      <!--{% endfor %}-->
+                                    <!--</ul>-->
+                                    <!--{% else %}-->
+                                      <!--<p>There are no courses available.</p>-->
+                                    <!--{% endif %}&ndash;&gt;-->
 
                             </ul>
                         </li>
