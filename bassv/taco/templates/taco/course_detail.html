@@ -109,7 +109,7 @@
                                       <td>7</td>
 
                                   </tr>
-                                 
+
                               </tbody>
                           </table>
                       </div>
@@ -157,7 +157,7 @@
                                       <td>7</td>
 
                                   </tr>
-                                 
+
                               </tbody>
                           </table>
                       </div>
@@ -176,13 +176,12 @@
                   <!-- /.panel-heading -->
                   <div class="panel-body">
                       <div class="table-responsive table-bordered">
-                          <table class="table">
+                          <table class="table" id="myTable">
                               <thead>
                                   <tr>
                                       <th>TA</th>
                                       <th>Assignment</th>
-                                      <th>Username</th>
-                                      <th>+</th>
+                                      <th> <span onclick="myCreateFunction()">Add new</span></th>
 
                                   </tr>
                               </thead>
@@ -190,6 +189,42 @@
 
                               </tbody>
                           </table>
+                          <script>
+function myCreateFunction() {
+  $("#myTable tbody").append("<tr>"+
+" <td> <select>{% for ta in course.ta.all %}<option>{{ ta.full_name }}</option>{% endfor %}</select></td>"
+ +
+"<td><input type='text'/></td>"+
+"<td><span class='btnSave'>Save/</span><span class='btnDelete'/>Delete</span></td>"+
+"</tr>");
+
+$(".btnSave").bind("click", Save);
+$(".btnDelete").bind("click", Delete);
+};
+
+function Save(){
+// var par = $(this).parent().parent(); //tr
+// var tdName = par.children("td:nth-child(1)");
+// var tdPhone = par.children("td:nth-child(2)");
+// var tdEmail = par.children("td:nth-child(3)");
+// var tdButtons = par.children("td:nth-child(4)");
+  //
+// tdName.html(tdName.children("input[type=text]").val());
+// tdPhone.html(tdPhone.children("input[type=text]").val());
+// tdEmail.html(tdEmail.children("input[type=text]").val());
+tdButtons.html("<span class='btnEdit'>Edit/</span><span class='btnDelete'/>Delete</span>");
+
+$(".btnEdit").bind("click", Edit);
+$(".btnDelete").bind("click", Delete);
+};
+//     var table = document.getElementById("myTable");
+//     var row = table.insertRow();
+//     var cell1 = row.insertCell(0);
+//     var cell2 = row.insertCell(1);
+//     cell1.innerHTML = "NEW CELL1";
+//     cell2.innerHTML = "NEW CELL2";
+// }
+</script>
                       </div>
                       <!-- /.table-responsive -->
                   </div>
@@ -197,13 +232,12 @@
               </div>
               <!-- /.panel -->
           </div>
-
-          <div class="row">
+            <div class="row">
           <div class="col-lg-12">
               <div class="panel panel-default">
                   <div class="panel-heading"><b>Updates</b></div>
                   <!-- /.panel-heading -->
-                  <div class="panel-body">                             
+                  <div class="panel-body">
                                   <ul>
                                     {% for update in course.courseupdate_set.all %}
                                       <li>
@@ -212,7 +246,7 @@
                                     {% endfor %}
                                   </ul>
 
-                            
+
                       <!-- /.table-responsive -->
                   </div>
                   <!-- /.panel-body -->
