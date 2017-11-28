@@ -110,11 +110,29 @@
 
                                   </tr>
                                   <tr>
-                                      <th bgcolor="#f8f8f8">Hours</th>
-                                      <td>3</td>
-                                      <td>2</td>
-                                      <td>7</td>
+                                      <th bgcolor="#f8f8f8">Assigned_hours</th>
+                                      {% for ta in course.ta.all %}
+                                        {% if ta.assignment is None %}
+                                            <td></td>
+                                        {% elif ta.assignment.cid.cid == course.cid %}
+                                            <td>{{ ta.assignment.assigned_hours }}</td>
+                                        {% else %}
+                                            <td></td>
+                                        {% endif%}
+                                      {% endfor %}
+                                  </tr>
 
+                                    <tr>
+                                      <th bgcolor="#f8f8f8">Worked_hours</th>
+                                      {% for ta in course.ta.all %}
+                                        {% if ta.assignment is None %}
+                                            <td></td>
+                                        {% elif ta.assignment.cid.cid == course.cid %}
+                                            <td>{{ ta.assignment.worked_hours }}</td>
+                                        {% else %}
+                                            <td>q</td>
+                                        {% endif%}
+                                      {% endfor %}
                                   </tr>
                                  
                               </tbody>
