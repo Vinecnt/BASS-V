@@ -143,7 +143,7 @@
                               </thead>
                               <tbody>
                                   <tr>
-                                      <th bgcolor="#f8f8f8">Task</th>
+                                      <th bgcolor="#f8f8f8">Assignment</th>
                                       <td>Grade quiz#1</td>
                                       <td>Grade HW#1</td>
                                       <td>Lead discussion#1</td>
@@ -171,7 +171,7 @@
           <div class="col-lg-6">
               <div class="panel panel-default">
                   <div class="panel-heading">
-                    Add Tasks
+                    Add Assignments
                     </div>
                   <!-- /.panel-heading -->
                   <div class="panel-body">
@@ -181,7 +181,8 @@
                                   <tr>
                                       <th>TA</th>
                                       <th>Assignment</th>
-                                      <th> <span onclick="myCreateFunction()">Add new</span></th>
+                                      <th>Hours</th>
+                                      <th> <button onclick="myCreateFunction()">Add new</button></th>
 
                                   </tr>
                               </thead>
@@ -194,6 +195,7 @@ function myCreateFunction() {
   $("#myTable tbody").append("<tr>"+
 " <td> <select>{% for ta in course.ta.all %}<option>{{ ta.full_name }}</option>{% endfor %}</select></td>"
  +
+"<td><input type='text'/></td>"+
 "<td><input type='text'/></td>"+
 "<td><span class='btnSave'>Save/</span><span class='btnDelete'/>Delete</span></td>"+
 "</tr>");
