@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Update, Course, AssignmentCommunication, Assignment, Ta, Professor, CourseOffering
+from .models import Update, Course, AssignmentCommunication, Assignment, Ta, Professor, CourseOffering, CourseUpdate
 
 # admin.site.register(Message)
 # admin.site.register(Course)
@@ -13,9 +13,10 @@ from .models import Update, Course, AssignmentCommunication, Assignment, Ta, Pro
 # admin.site.register(MessageCommunication)
 
 
-@admin.register(Update)
-class UpdateAdmin(admin.ModelAdmin):
-    list_display = ('uid','ustring')
+
+# @admin.register(Update)
+# class UpdateAdmin(admin.ModelAdmin):
+#     list_display = ('uid','ustring')
 
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
@@ -45,7 +46,7 @@ class CourseOfferingAdmin(admin.ModelAdmin):
     pass
 
 
-# @admin.register(MessageCommunication)
-# class MessageCommunicationAdmin(admin.ModelAdmin):
-#     # list_display = ('mid','tid','pid')
-#     pass
+@admin.register(CourseUpdate)
+class CourseUpdateAdmin(admin.ModelAdmin):
+    # list_display = ('mid','tid','pid')
+    pass

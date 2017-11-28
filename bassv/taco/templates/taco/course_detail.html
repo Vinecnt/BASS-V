@@ -86,9 +86,7 @@
                               <thead>
                                   <tr>
                                     <th bgcolor="#f8f8f8">Assigned TA</th>
-                                    {% for ta in course.ta.all %}
-                                      <td>{{ ta.full_name }}</td>
-                                      {% endfor %}
+                                    {% for ta in course.ta.all %} <td>{{ ta.full_name }}</td> {% endfor %}
                                       <!-- <th>#</th>
                                       <th>Task</th>
                                       <th>Hours</th>
@@ -98,41 +96,18 @@
                               <tbody>
                                   <tr>
                                       <th bgcolor="#f8f8f8">Task</th>
-                                      {% for ta in course.ta.all %}
-                                        {% if ta.assignment is None %}
-                                            <td>No assignment</td>
-                                        {% elif ta.assignment.cid.cid == course.cid %}
-                                            <td>{{ ta.assignment.aname }}</td>
-                                        {% else %}
-                                            <td>No assignment</td>
-                                        {% endif%}
-                                      {% endfor %}
+                                      <td>Grade quiz#1</td>
+                                      <td>Grade HW#1</td>
+                                      <td>Lead discussion#1</td>
+
 
                                   </tr>
                                   <tr>
-                                      <th bgcolor="#f8f8f8">Assigned_hours</th>
-                                      {% for ta in course.ta.all %}
-                                        {% if ta.assignment is None %}
-                                            <td></td>
-                                        {% elif ta.assignment.cid.cid == course.cid %}
-                                            <td>{{ ta.assignment.assigned_hours }}</td>
-                                        {% else %}
-                                            <td></td>
-                                        {% endif%}
-                                      {% endfor %}
-                                  </tr>
+                                      <th bgcolor="#f8f8f8">Hours</th>
+                                      <td>3</td>
+                                      <td>2</td>
+                                      <td>7</td>
 
-                                    <tr>
-                                      <th bgcolor="#f8f8f8">Worked_hours</th>
-                                      {% for ta in course.ta.all %}
-                                        {% if ta.assignment is None %}
-                                            <td></td>
-                                        {% elif ta.assignment.cid.cid == course.cid %}
-                                            <td>{{ ta.assignment.worked_hours }}</td>
-                                        {% else %}
-                                            <td>q</td>
-                                        {% endif%}
-                                      {% endfor %}
                                   </tr>
                                  
                               </tbody>
@@ -216,6 +191,28 @@
                               </tbody>
                           </table>
                       </div>
+                      <!-- /.table-responsive -->
+                  </div>
+                  <!-- /.panel-body -->
+              </div>
+              <!-- /.panel -->
+          </div>
+
+          <div class="row">
+          <div class="col-lg-12">
+              <div class="panel panel-default">
+                  <div class="panel-heading"><b>Updates</b></div>
+                  <!-- /.panel-heading -->
+                  <div class="panel-body">                             
+                                  <ul>
+                                    {% for update in course.courseupdate_set.all %}
+                                      <li>
+                                        <p>{{ update.comment }}<br>Created by {{ update.user }} on {{ update.date }}</p>
+                                      </li>
+                                    {% endfor %}
+                                  </ul>
+
+                            
                       <!-- /.table-responsive -->
                   </div>
                   <!-- /.panel-body -->

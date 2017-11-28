@@ -46,3 +46,12 @@ class CourseDetailView(LoginRequiredMixin, generic.DetailView):
 
 class UpdateListView(LoginRequiredMixin, generic.ListView):
     model = Update
+
+def update(request, pk):
+  course = get_object_or_404(course, pk=pk)
+  update = CourseReview(
+      comment=request.POST['comment'],
+      user=request.user,
+      Course=Course)
+  review.save()
+  return HttpResponseRedirect(reverse('course_detail', args=(course.cid,)))

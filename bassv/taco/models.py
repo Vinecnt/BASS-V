@@ -2,6 +2,8 @@ from django.db import models
 import uuid
 from django.urls import reverse
 from django.contrib.auth.models import User
+from datetime import date
+
 # Create your models here.
 
 
@@ -135,15 +137,14 @@ class Update(models.Model):
 	def __str__(self):
 		return self.ustring
 
-	# def display_course(self):
-	# 	return ', '.join([ desiredCourse.cname for desiredCourse in self.desiredCourse.all()[:3]])
-	# 	display_course.short_description = 'Course'
 
-# class MessageCommunication(models.Model):
-# 	# I dont know how to reference two foreign keys to the same attribute so to make
-# 	# it easier for the time being we just have TA and PID
-# 	# also worst come worst we can hard code what we want our application to do
+class Update(models.Model):
+    comment = models.TextField(blank=True, null=True)
+    user = models.ForeignKey(User, default=1)
+    date = models.DateField(default=date.today)
 
-# 	mid = models.ForeignKey('Message', on_delete=models.SET_NULL, null=True)
-# 	# tid = models.ForeignKey('TA', on_delete=models.SET_NULL, null=True)
-# 	# pid = models.ForeignKey('Professor', on_delete=models.SET_NULL, null=True)
+    class Meta:
+        abstract = True
+
+class CourseUpdate(Update):
+    course = models.ForeignKey(Course)
