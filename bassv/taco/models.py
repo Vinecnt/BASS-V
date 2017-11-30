@@ -1,8 +1,9 @@
 from django.db import models
 import uuid
 from django.urls import reverse
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from datetime import date
+
 
 # Create your models here.
 
@@ -23,6 +24,7 @@ class Assignment(models.Model):
 	aname = models.CharField(max_length=200, help_text="Enter a name for the Assignment")
 	worked_hours = models.IntegerField(default=0, help_text="number of hours worked")
 	assigned_hours = models.IntegerField(default=0, help_text="number of assigned hours")
+	user = models.ForeignKey(User, default=1)
 
 	def __str__(self):
 		"""

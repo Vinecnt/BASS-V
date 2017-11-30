@@ -3,6 +3,8 @@ from .models import *
 from django.views import generic
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User, Group
+
 
 # def custom_login(request):
 #     if request.user.is_authenticated():
@@ -43,6 +45,9 @@ class CourseListView(LoginRequiredMixin, generic.ListView):
 class CourseDetailView(LoginRequiredMixin, generic.DetailView):
     model = Course
 
+    # def get_context_data(self, **kwargs):
+    #     context= super(Course, self).get_context_data(** kwargs)
+    #     return context
 
 class UpdateListView(LoginRequiredMixin, generic.ListView):
     model = Update
