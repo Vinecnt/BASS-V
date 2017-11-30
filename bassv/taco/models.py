@@ -49,6 +49,7 @@ class Ta(models.Model):
 	# unique id for each assignment
 	tid = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="Unique ID for the TA")
 	full_name = models.CharField(max_length=200, help_text="Enter Full Name")
+	role = models.CharField(max_length=200, default="TA", help_text="Enter Role")
 	assignment = models.ForeignKey('Assignment', on_delete=models.SET_NULL, null=True)
 	# last_name = models.CharField(max_length=200, help_text="Enter Last Name")
 
@@ -131,13 +132,7 @@ class CourseOffering(models.Model):
 		return '%s' % (self.cid)
 
 
-class Update(models.Model):
-	uid = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="Unique ID for the Update")
-	ustring = models.CharField(max_length=200, help_text="Enter the Update")
-	desiredCourse = models.ManyToManyField(Course, help_text="Select a course that you would like to update its TA's")
 
-	def __str__(self):
-		return self.ustring
 
 
 class Update(models.Model):
