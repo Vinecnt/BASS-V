@@ -1,0 +1,13 @@
+{% extends "base_generic.html" %}
+{% block content %}
+
+    <h1>Course: {{course.cname}}</h1>
+    <p>Professor: {{course.professor}}</p>s
+
+    <form action="" method="post" class=add>
+        {% csrf_token %}
+        {{ AddNewAssignmentForm }}
+         <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+
+{% endblock %}

@@ -9,6 +9,7 @@ urlpatterns = [
     url(r'^courses/$', views.CourseListView.as_view(), name='courses'),
     url(r'^course/(?P<pk>[A-Za-z0-9-]+)$', views.CourseDetailView.as_view(), name='course-detail'),
     url(r'^update/$', views.UpdateListView.as_view(), name='update'),
+    url(r'^course/add/$', views.addAssignment, name='addAssignment'),
     # url(r'\^courses/(?P<pk>\\d+)/updates/create/$',
 	# views.update,
 	# name='update_create'),

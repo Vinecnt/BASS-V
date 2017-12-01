@@ -39,21 +39,31 @@
                   <!-- /.panel-heading -->
                   <div class="panel-body">
                       <div class="table-responsive">
-                          <table id="current-assignment-table" class="table">
+                          <table class="table table-striped table-bordered table-hover">
                               <thead>
                                   <tr>
-                                      <th bgcolor="#f8f8f8">Full Name</th>
-                                      <!-- <th>Role</th> -->
-                                      {% for ta in course.ta.all %} <td>{{ ta.full_name }}</td> {% endfor %}
-                                  </tr>
-                                  <tr>
-                                      <th bgcolor="#f8f8f8">Role</th>
-                                      <!-- <th>Role</th> -->
-                                      {% for ta in course.ta.all %} <td>{{ ta.role }}</td> {% endfor %}
+                                      <th>Full Name</th>
+                                      <th>Role</th>
                                   </tr>
                               </thead>
                               <tbody>
-                                  
+                                  <!-- <tr>
+
+                                      <td>1</td>
+                                      <td>Mark Otto</td>
+                                      <td>TA</td>
+                                  </tr>
+                                  <tr>
+                                      <td>2</td>
+                                      <td>Jacob Thornton</td>
+                                      <td>TA</td>
+                                  </tr>
+                                  <tr>
+                                      <td>3</td>
+                                      <td>Larry the Bird</td>
+                                      <td>Head TA</td>
+                                  </tr> -->
+                                  {% for ta in course.ta.all %} <tr><td>{{ ta.full_name }}</td><td>TA</td></tr> {% endfor %}
                               </tbody>
                           </table>
                       </div>
@@ -162,11 +172,15 @@
                                       <th bgcolor="#f8f8f8">Assignment</th>
                                       <td>Grade quiz#1</td>
                                       <td>Grade HW#1</td>
+                                      <td>Lead discussion#1</td>
+
+
                                   </tr>
                                   <tr>
                                       <th bgcolor="#f8f8f8">Hours</th>
                                       <td>3</td>
                                       <td>2</td>
+                                      <td>7</td>
 
                                   </tr>
 
@@ -184,6 +198,35 @@
           <div class="col-lg-6">
               <div class="panel panel-default">
                   <div class="panel-heading">
+                        My Assignments
+                    </div>
+                  <!-- /.panel-heading -->
+                  <div class="panel-body">
+                      <div class="table-responsive table-bordered">
+                          <table class="table" id="myTable">
+                              <thead>
+                                  <tr>
+                                      <th>TA</th>
+                                      <th>Assignment</th>
+                                      <th>Hours</th>
+                                      <th>Completed Hours</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+
+                              </tbody>
+                          </table>
+                      </div>
+                      <!-- /.table-responsive -->
+                  </div>
+                  <!-- /.panel-body -->
+              </div>
+              <!-- /.panel -->
+          </div>
+          {% else %}
+          <div class="col-lg-6">
+              <div class="panel panel-default">
+                  <div class="panel-heading">
                         Add Assignments
                     </div>
                   <!-- /.panel-heading -->
@@ -196,7 +239,6 @@
                                       <th>Assignment</th>
                                       <th>Hours</th>
                                       <th> <button onclick="myCreateFunction()">Add new</button></th>
-
                                   </tr>
                               </thead>
                               <tbody>
@@ -205,108 +247,33 @@
                           </table>
                           <script>
 function myCreateFunction() {
-  $("#myTable tbody").append("<tr>"+
-" <td> <select>{% for ta in course.ta.all %}<option>{{ ta.full_name }}</option>{% endfor %}</select></td>"
- +
-"<td><input type='text'/></td>"+
-"<td><input type='text'/></td>"+
-"<td><span class='btnSave'>Save/</span><span class='btnDelete'/>Delete</span></td>"+
-"</tr>");
+  $("#myTable tbody").append("<form action=\"{% url 'addAssignment' %}\" method=\"POST\" id=\"addAssignmentForm\">  {% csrf_token %} <tr>"+
+"<td> <select>{% for ta in course.ta.all %}<option>{{ ta.full_name }}</option>{% endfor %}</select></td>"
+  +
+  "<td>Assignment Name:<br>" +
+  "<input type=\"text\" name=\"Assignment\"><br></td>" +
+  "<td>Assigned Hours:<br>" +
+  "<input type=\"text\" name=\"assigned_hours\"><br></td>" +
+  "<input type= \"hidden\" name=\"courseid\" value=\"{{course.cid}}\">" +
+  "<td><input id=\"submit\" type=\"submit\" value=\"Save\" /></td>" +
+"</tr></form>");
 
-$(".btnSave").bind("click", Save);
-$(".btnDelete").bind("click", Delete);
 };
-
-function Save(){
-// var par = $(this).parent().parent(); //tr
-// var tdName = par.children("td:nth-child(1)");
-// var tdPhone = par.children("td:nth-child(2)");
-// var tdEmail = par.children("td:nth-child(3)");
-// var tdButtons = par.children("td:nth-child(4)");
-  //
-// tdName.html(tdName.children("input[type=text]").val());
-// tdPhone.html(tdPhone.children("input[type=text]").val());
-// tdEmail.html(tdEmail.children("input[type=text]").val());
-tdButtons.html("<span class='btnEdit'>Edit/</span><span class='btnDelete'/>Delete</span>");
-
-$(".btnEdit").bind("click", Edit);
-$(".btnDelete").bind("click", Delete);
-};
-//     var table = document.getElementById("myTable");
-//     var row = table.insertRow();
-//     var cell1 = row.insertCell(0);
-//     var cell2 = row.insertCell(1);
-//     cell1.innerHTML = "NEW CELL1";
-//     cell2.innerHTML = "NEW CELL2";
-// }
+  $('#addAssignmentForm').submit(function(e){
+    console.log("form submitted!")
+        e.preventDefault();
+        var $form = $(this),
+            aname = $form.find('input[name="Assignment"]').val(),
+            assigned_hours = $form.find('input[name="assigned_hours"]').val(),
+            cid = $form.find('input[name="courseid"]').val();
+        $.ajax({
+            url: $(this).attr('action'),
+            method: $(this).attr('method'),
+            data: aname, assigned_hours, cid,
+            success: function(data){ $('#target').html(data) }
+        });
+    });
 </script>
-                      </div>
-                      <!-- /.table-responsive -->
-                  </div>
-                  <!-- /.panel-body -->
-              </div>
-              <!-- /.panel -->
-          </div>
-          {% else %}
-          <div class="col-lg-6">
-              <div class="panel panel-default">
-                  <div class="panel-heading">
-                        My Assignments
-                    </div>
-                  <!-- /.panel-heading -->
-                  <div class="panel-body">
-                      <div class="table-responsive table-bordered">
-                          <table class="table" id="myTable">
-                              <thead>
-                                  <tr>
-                                      <th>Assignment</th>
-                                      <th>Hours</th>
-                                      <th>Completed Hours</th>
-                                      <!-- <th> <button onclick="myCreateFunction()">Add new</button></th> -->
-
-                                  </tr>
-                              </thead>
-                              <tbody>
-
-                              </tbody>
-                          </table>
-                          <!-- <script>
-function myCreateFunction() {
-  $("#myTable tbody").append("<tr>"+
-" <td> <select>{% for ta in course.ta.all %}<option>{{ ta.full_name }}</option>{% endfor %}</select></td>"
- +
-"<td><input type='text'/></td>"+
-"<td><input type='text'/></td>"+
-"<td><span class='btnSave'>Save/</span><span class='btnDelete'/>Delete</span></td>"+
-"</tr>");
-
-$(".btnSave").bind("click", Save);
-$(".btnDelete").bind("click", Delete);
-};
-
-function Save(){
-// var par = $(this).parent().parent(); //tr
-// var tdName = par.children("td:nth-child(1)");
-// var tdPhone = par.children("td:nth-child(2)");
-// var tdEmail = par.children("td:nth-child(3)");
-// var tdButtons = par.children("td:nth-child(4)");
-  //
-// tdName.html(tdName.children("input[type=text]").val());
-// tdPhone.html(tdPhone.children("input[type=text]").val());
-// tdEmail.html(tdEmail.children("input[type=text]").val());
-tdButtons.html("<span class='btnEdit'>Edit/</span><span class='btnDelete'/>Delete</span>");
-
-$(".btnEdit").bind("click", Edit);
-$(".btnDelete").bind("click", Delete);
-};
-//     var table = document.getElementById("myTable");
-//     var row = table.insertRow();
-//     var cell1 = row.insertCell(0);
-//     var cell2 = row.insertCell(1);
-//     cell1.innerHTML = "NEW CELL1";
-//     cell2.innerHTML = "NEW CELL2";
-// }
-</script> -->
                       </div>
                       <!-- /.table-responsive -->
                   </div>

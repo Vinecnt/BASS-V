@@ -4,6 +4,9 @@ from django.views import generic
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User, Group
+from .forms import AddNewAssignmentForm
+from django.http import HttpResponse
+import json
 
 
 # def custom_login(request):
@@ -60,3 +63,29 @@ def update(request, pk):
       Course=Course)
   review.save()
   return HttpResponseRedirect(reverse('course_detail', kwargs=(course.cid,)))
+
+def addAssignment(request):
+    if request.method=="POST":
+        print("message")
+        form= AddNewAssignmentForm(request.POST)
+        # if form.is_valid():
+        if True:
+            print("form valid")
+            # assignment=form.save(commit=False)
+            assignment = Assignment()
+            print(request.POST)
+            print("%s, %s, %s" % (request.POST.get('aname'), request.POST.get('assigned_hours'), request.POST.get('cid')))
+            assignment.aname=request.POST.get('Assignment')
+            assignment.assigned_hours=request.POST.get('assigned_hours')
+            assignment.cid = Course.objects.get(cid=request.POST.get('courseid'))
+            assignment.save()
+            return HttpResponse(
+                    json.dumps({'status': 'OK'}),
+                    content_type="application/json"
+                    )
+    else:
+        form=AddNewAssignmentForm
+    return HttpResponse(
+            json.dumps({'status': 'OK'}),
+            content_type="application/json"
+            )
