@@ -246,7 +246,7 @@ function myCreateFunction() {
   $("#myTable tbody").append("<form action=\"{% url 'addAssignment' %}\" method=\"POST\" id=\"addAssignmentForm\">  {% csrf_token %} <tr>"+
 "<td> <select>{% for ta in course.ta.all %}<option>{{ ta.full_name }}</option>{% endfor %}</select></td>"
   +
-  "<td>Assignment Name:<br>" +
+  "<br><br><td>Assignment Name:<br>" +
   "<input type=\"text\" name=\"Assignment\"><br></td>" +
   "<td>Assigned Hours:<br>" +
   "<input type=\"text\" name=\"assigned_hours\"><br></td>" +
