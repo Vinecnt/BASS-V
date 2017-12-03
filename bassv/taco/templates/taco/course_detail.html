@@ -123,19 +123,6 @@
                                   </tr>
 
 
-                                    <tr>
-                                      <th bgcolor="#f8f8f8">Worked_hours</th>
-                                      {% for ta in course.ta.all %}
-                                        {% if ta.assignment is None %}
-                                            <td></td>
-                                        {% elif ta.assignment.cid.cid == course.cid %}
-                                            <td>{{ ta.assignment.worked_hours }}</td>
-                                        {% else %}
-                                            <td>q</td>
-                                        {% endif%}
-                                      {% endfor %}
-                                  </tr>
-
                               </tbody>
                           </table>
                       </div>
