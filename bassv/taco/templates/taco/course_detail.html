@@ -155,22 +155,31 @@
                                   </tr>
                               </thead>
                               <tbody>
-                                  <tr>
-                                      <th bgcolor="#f8f8f8">Assignment</th>
-                                      <td>Grade quiz#1</td>
-                                      <td>Grade HW#1</td>
-                                      <td>Lead discussion#1</td>
-
-
-                                  </tr>
-                                  <tr>
-                                      <th bgcolor="#f8f8f8">Hours</th>
-                                      <td>3</td>
-                                      <td>2</td>
-                                      <td>7</td>
+                                 <tr>
+                                      <th bgcolor="#f8f8f8">Assignments</th>
+                                      {% for ta in course.ta.all %}
+                                        {% if ta.assignment is None %}
+                                            <td>No assignment</td>
+                                        {% elif ta.assignment.cid.cid == course.cid %}
+                                            <td>{{ ta.assignment.aname }}</td>
+                                        {% else %}
+                                            <td>No assignment</td>
+                                        {% endif%}
+                                      {% endfor %}
 
                                   </tr>
-
+                                  <tr>
+                                      <th bgcolor="#f8f8f8">Assigned_hours</th>
+                                      {% for ta in course.ta.all %}
+                                        {% if ta.assignment is None %}
+                                            <td></td>
+                                        {% elif ta.assignment.cid.cid == course.cid %}
+                                            <td>{{ ta.assignment.assigned_hours }}</td>
+                                        {% else %}
+                                            <td></td>
+                                        {% endif%}
+                                      {% endfor %}
+                                  </tr>
                               </tbody>
                           </table>
                       </div>
