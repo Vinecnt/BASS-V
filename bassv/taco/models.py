@@ -24,7 +24,7 @@ class Assignment(models.Model):
 	aname = models.CharField(max_length=200, help_text="Enter a name for the Assignment")
 	worked_hours = models.IntegerField(default=0, help_text="number of hours worked")
 	assigned_hours = models.IntegerField(default=0, help_text="number of assigned hours")
-	user = models.ForeignKey(User, default=1)
+	user = models.ForeignKey(User, default=1, limit_choices_to={"groups":1})
 
 	def __str__(self):
 		"""

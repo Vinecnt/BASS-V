@@ -110,7 +110,7 @@
 
                                   </tr>
                                   <tr>
-                                      <th bgcolor="#f8f8f8">Assigned_hours</th>
+                                      <th bgcolor="#f8f8f8">Assigned hours</th>
                                       {% for ta in course.ta.all %}
                                         {% if ta.assignment is None %}
                                             <td></td>
@@ -190,35 +190,7 @@
               <!-- /.panel -->
           </div>
           <!-- /.col-lg-6 -->
-          {% if request.user|has_group:"Professors" %}
-          <div class="col-lg-6">
-              <div class="panel panel-default">
-                  <div class="panel-heading">
-                        My Assignments
-                    </div>
-                  <!-- /.panel-heading -->
-                  <div class="panel-body">
-                      <div class="table-responsive table-bordered">
-                          <table class="table" id="myTable">
-                              <thead>
-                                  <tr>
-                                      <th>TA</th>
-                                      <th>Assignment</th>
-                                      <th>Hours</th>
-                                      <th>Completed Hours</th>
-                                  </tr>
-                              </thead>
-                              <tbody>
-
-                              </tbody>
-                          </table>
-                      </div>
-                      <!-- /.table-responsive -->
-                  </div>
-                  <!-- /.panel-body -->
-              </div>
-              <!-- /.panel -->
-          </div>
+              {% if request.user|has_group:"Teaching Assistants" %}
           {% else %}
           <div class="col-lg-6">
               <div class="panel panel-default">
