@@ -47,23 +47,12 @@
                                   </tr>
                               </thead>
                               <tbody>
-                                  <!-- <tr>
-
-                                      <td>1</td>
-                                      <td>Mark Otto</td>
+                                  {% for ta in course.ta.all %}
+                                  <tr>
+                                      <td>{{ ta.full_name }}</td>
                                       <td>TA</td>
                                   </tr>
-                                  <tr>
-                                      <td>2</td>
-                                      <td>Jacob Thornton</td>
-                                      <td>TA</td>
-                                  </tr>
-                                  <tr>
-                                      <td>3</td>
-                                      <td>Larry the Bird</td>
-                                      <td>Head TA</td>
-                                  </tr> -->
-                                  {% for ta in course.ta.all %} <tr><td>{{ ta.full_name }}</td><td>TA</td></tr> {% endfor %}
+                                  {% endfor %}
                               </tbody>
                           </table>
                       </div>
@@ -213,10 +202,10 @@
 
                               </tbody>
                           </table>
-                          <script>
+<script>
 function myCreateFunction() {
   $("#myTable tbody").append("<form action=\"{% url 'addAssignment' %}\" method=\"POST\" id=\"addAssignmentForm\">  {% csrf_token %} <tr>"+
-"<td> <select>{% for ta in course.ta.all %}<option>{{ ta.full_name }}</option>{% endfor %}</select></td>"
+"<td> <select name="Ta" id="Ta">{% for ta in course.ta.all %}<option>{{ ta }}</option>{% endfor %}</select></td>"
   +
   "<br><br><td>Assignment Name:<br>" +
   "<input type=\"text\" name=\"Assignment\"><br></td>" +
@@ -233,11 +222,12 @@ function myCreateFunction() {
         var $form = $(this),
             aname = $form.find('input[name="Assignment"]').val(),
             assigned_hours = $form.find('input[name="assigned_hours"]').val(),
-            cid = $form.find('input[name="courseid"]').val();
+            cid = $form.find('input[name="courseid"]').val(),
+            Ta = $form.find('input[name="Ta"]').val();
         $.ajax({
             url: $(this).attr('action'),
             method: $(this).attr('method'),
-            data: aname, assigned_hours, cid,
+            data: aname, assigned_hours, cid, Ta
             success: function(data){ $('#target').html(data) }
         });
     });
@@ -250,7 +240,11 @@ function myCreateFunction() {
               <!-- /.panel -->
           </div>
           {% endif%}
-            <div class="row">
+
+          </div>
+
+
+              <div class="row">
           <div class="col-lg-12">
               <div class="panel panel-default">
                   <div class="panel-heading"><b>Updates</b></div>
@@ -273,6 +267,12 @@ function myCreateFunction() {
           </div>
           <!-- /.col-lg-6 -->
       </div>
+
+          <!-- /.col-lg-6 -->
+      </div>
+
+
+
       <!-- /.row -->
 
       <!-- /.row -->

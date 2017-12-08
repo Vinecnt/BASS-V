@@ -22,9 +22,10 @@ class Assignment(models.Model):
 	cid = models.ForeignKey('Course', on_delete=models.SET_NULL, null=True)
 	# Assignment Name for referencing the assignment
 	aname = models.CharField(max_length=200, help_text="Enter a name for the Assignment")
-	worked_hours = models.IntegerField(default=0, help_text="number of hours worked")
 	assigned_hours = models.IntegerField(default=0, help_text="number of assigned hours")
 	user = models.ForeignKey(User, default=1, limit_choices_to={"groups":1})
+	tid = models.ForeignKey('TA', on_delete=models.SET_NULL, null=True)
+
 
 	def __str__(self):
 		"""
@@ -42,15 +43,12 @@ class AssignmentCommunication(models.Model):
 	PROFESSOR ID
 	"""
 	aid = models.ForeignKey('Assignment', on_delete=models.SET_NULL, null=True)
-	# tid = models.ForeignKey('TA', on_delete=models.SET_NULL, null=True)
 	# pid = models.ForeignKey('Professor', on_delete=models.SET_NULL, null=True)
 
 class Ta(models.Model):
 	# unique id for each assignment
 	tid = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="Unique ID for the TA")
 	full_name = models.CharField(max_length=200, help_text="Enter Full Name")
-	role = models.CharField(max_length=200, default="TA", help_text="Enter Role")
-	assignment = models.ForeignKey('Assignment', on_delete=models.SET_NULL, null=True)
 	# last_name = models.CharField(max_length=200, help_text="Enter Last Name")
 
 
