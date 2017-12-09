@@ -17,7 +17,7 @@ class Assignment(models.Model):
 	# unique id for each assignment
 	aid = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="Unique ID for the Assignment")
 	# for stroing the link to the place where the assignment is located.
-	assignment_link = models.CharField(max_length=200, help_text="Enter the link to find the Assignment")
+	# assignment_link = models.CharField(max_length=200, help_text="Enter the link to find the Assignment")
 	# foregin key to reference the course which the assifnment is for
 	cid = models.ForeignKey('Course', on_delete=models.SET_NULL, null=True)
 	# Assignment Name for referencing the assignment
@@ -33,6 +33,12 @@ class Assignment(models.Model):
         Returns the name of the Assignment
         """
 		return self.aname
+
+	def get_assignments(self, cid_name):
+
+		return Assignment.objects.filter(cid=cid_name)
+
+
 
 
 class AssignmentCommunication(models.Model):
@@ -90,6 +96,9 @@ class Course(models.Model):
 	def display_ta(self):
 		return ', '.join([ ta.full_name for ta in self.ta.all()[:3]])
 		display_ta.short_description = 'Ta'
+
+	def get_assignments(self):
+		return Assignment.objects.filter(cid = self.cid).all()
 
 
 

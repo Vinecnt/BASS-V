@@ -28,7 +28,7 @@ class TaADmin(admin.ModelAdmin):
 
 @admin.register(Assignment)
 class AssignmentAdmin(admin.ModelAdmin):
-    list_display = ('aid','assignment_link','cid','aname')
+    list_display = ('aid','cid','aname')
 
 @admin.register(AssignmentCommunication)
 class AssignmentCommunicationAdmin(admin.ModelAdmin):
