@@ -88,14 +88,23 @@
                                   <tr>
                                       <th bgcolor="#f8f8f8">Assignments</th>
                                       {% for assignment in course.get_assignments %}
-                                        {{assignment}}
                                         {% for ta in course.ta.all %}
                                             {% if ta.tid == assignment.tid.tid %}
-                                                <td> {{assignment.aname}} , {{assignment.assigned_hours}}</td>
+                                                <td> {{assignment.aname}}</td>
                                             {% endif%}
                                         {% endfor %}
                                       {% endfor %}
 
+                                  </tr>
+                                  <tr>
+                                      <th bgcolor="#f8f8f8">Assigned_hours</th>
+                                      {% for assignment in course.get_assignments %}
+                                        {% for ta in course.ta.all %}
+                                            {% if ta.tid == assignment.tid.tid %}
+                                                <td> {{assignment.assigned_hours}}</td>
+                                            {% endif%}
+                                        {% endfor %}
+                                      {% endfor %}
                                   </tr>
 
 
@@ -123,7 +132,9 @@
                               <thead>
                                   <tr>
                                     <th bgcolor="#f8f8f8">Assigned TA</th>
-                                    {% for ta in course.ta.all %} <td>{{ ta.full_name }}</td> {% endfor %}
+                                    {% for ta in course.ta.all %}
+                                      <td colspan="1">{{ ta.full_name }}</td>
+                                      {% endfor %}
                                       <!-- <th>#</th>
                                       <th>Task</th>
                                       <th>Hours</th>
@@ -133,27 +144,23 @@
                               <tbody>
                                  <tr>
                                       <th bgcolor="#f8f8f8">Assignments</th>
-                                      {% for ta in course.ta.all %}
-                                        {% if ta.assignment is None %}
-                                            <td>No assignment</td>
-                                        {% elif ta.assignment.cid.cid == course.cid %}
-                                            <td>{{ ta.assignment.aname }}</td>
-                                        {% else %}
-                                            <td>No assignment</td>
-                                        {% endif%}
+                                      {% for assignment in course.get_assignments %}
+                                        {% for ta in course.ta.all %}
+                                            {% if ta.tid == assignment.tid.tid %}
+                                                <td> {{assignment.aname}}</td>
+                                            {% endif%}
+                                        {% endfor %}
                                       {% endfor %}
 
                                   </tr>
                                   <tr>
                                       <th bgcolor="#f8f8f8">Assigned_hours</th>
-                                      {% for ta in course.ta.all %}
-                                        {% if ta.assignment is None %}
-                                            <td></td>
-                                        {% elif ta.assignment.cid.cid == course.cid %}
-                                            <td>{{ ta.assignment.assigned_hours }}</td>
-                                        {% else %}
-                                            <td></td>
-                                        {% endif%}
+                                      {% for assignment in course.get_assignments %}
+                                        {% for ta in course.ta.all %}
+                                            {% if ta.tid == assignment.tid.tid %}
+                                                <td> {{assignment.assigned_hours}}</td>
+                                            {% endif%}
+                                        {% endfor %}
                                       {% endfor %}
                                   </tr>
                               </tbody>

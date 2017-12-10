@@ -23,7 +23,7 @@ class Assignment(models.Model):
 	# Assignment Name for referencing the assignment
 	aname = models.CharField(max_length=200, help_text="Enter a name for the Assignment")
 	assigned_hours = models.IntegerField(default=0, help_text="number of assigned hours")
-	user = models.ForeignKey(User, default=1, limit_choices_to={"groups":1})
+	#user = models.ForeignKey(User, default=1, limit_choices_to={"groups":1})
 	tid = models.ForeignKey('TA', on_delete=models.SET_NULL, null=True)
 
 
