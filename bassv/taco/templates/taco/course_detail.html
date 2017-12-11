@@ -199,7 +199,7 @@
 <script>
 function myCreateFunction() {
   $("#myTable tbody").append("<form action=\"{% url 'addAssignment' %}\" method=\"POST\" id=\"addAssignmentForm\">  {% csrf_token %} <tr>"+
-"<td> <select>{% for ta in course.ta.all %}<option>{{ ta }}</option>{% endfor %}</select></td>"
+"<td> <select name='select_form' id='select_form'>{% for ta in course.ta.all %}<option>{{ ta }}</option> {% endfor %} </select></td>"
   +
   "<br><br><td>Assignment Name:<br>" +
   "<input type=\"text\" name=\"Assignment\"><br></td>" +
@@ -216,11 +216,12 @@ function myCreateFunction() {
         var $form = $(this),
             aname = $form.find('input[name="Assignment"]').val(),
             assigned_hours = $form.find('input[name="assigned_hours"]').val(),
-            cid = $form.find('input[name="courseid"]').val();
+            cid = $form.find('input[name="courseid"]').val(),
+            value = $('select[name="select_form"]').val();
         $.ajax({
             url: $(this).attr('action'),
             method: $(this).attr('method'),
-            data: aname, assigned_hours, cid,
+            data: aname, assigned_hours, cid, value,
             success: function(data){ $('#target').html(data) }
         });
     });

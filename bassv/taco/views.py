@@ -78,6 +78,8 @@ def addAssignment(request):
             assignment.aname=request.POST.get('Assignment')
             assignment.assigned_hours=request.POST.get('assigned_hours')
             assignment.cid = Course.objects.get(cid=request.POST.get('courseid'))
+            assignment.tid = (Ta.objects.filter(full_name=request.POST.get('select_form')))[0]
+            #assignment.tid = (Ta.objects.get(tid=request.POST.get('select_form')).tid)
             assignment.save()
             return HttpResponse(
                     json.dumps({'status': 'OK'}),
