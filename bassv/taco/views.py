@@ -8,7 +8,8 @@ from .forms import AddNewAssignmentForm
 from django.http import HttpResponse
 import json
 from django.shortcuts import redirect
-
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
 
 # def custom_login(request):
 #     if request.user.is_authenticated():
@@ -17,6 +18,9 @@ from django.shortcuts import redirect
 #         return login(request)
 
 # Create your views here.
+
+
+
 @login_required
 def index(request):
     """
