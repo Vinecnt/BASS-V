@@ -72,40 +72,24 @@
                   <div class="panel-body">
                       <div class="table-responsive">
                           <table id="current-assignment-table" class="table">
-                              <thead>
+                               <thead>
                                   <tr>
-                                    <th bgcolor="#f8f8f8">Assigned TA</th>
-                                    {% for ta in course.ta.all %}
-                                      <td>{{ ta.full_name }}</td>
-                                      {% endfor %}
-                                      <!-- <th>#</th>
-                                      <th>Task</th>
-                                      <th>Hours</th>
-                                      <th>Assigned TA</th> -->
+                                    <th bgcolor="#f8f8f8">TA</th>
+                                    <th bgcolor="#f8f8f8">Assignments</th>
                                   </tr>
                               </thead>
                               <tbody>
-                                  <tr>
-                                      <th bgcolor="#f8f8f8">Assignments</th>
-                                      {% for assignment in course.get_assignments %}
-                                        {% for ta in course.ta.all %}
+
+                                     {% for ta in course.ta.all %}
+                                        <td>{{ta}}</td>
+                                        {% for assignment in course.get_assignments %}
                                             {% if ta.tid == assignment.tid.tid %}
-                                                <td> {{assignment.aname}}</td>
+                                                <td> {{assignment.aname}} : <br/>{{assignment.assigned_hours}} hours</td>
                                             {% endif%}
                                         {% endfor %}
+                                        <tr></tr>
                                       {% endfor %}
 
-                                  </tr>
-                                  <tr>
-                                      <th bgcolor="#f8f8f8">Assigned_hours</th>
-                                      {% for assignment in course.get_assignments %}
-                                        {% for ta in course.ta.all %}
-                                            {% if ta.tid == assignment.tid.tid %}
-                                                <td> {{assignment.assigned_hours}}</td>
-                                            {% endif%}
-                                        {% endfor %}
-                                      {% endfor %}
-                                  </tr>
 
 
                               </tbody>
@@ -131,38 +115,24 @@
                           <table class="table table-striped">
                               <thead>
                                   <tr>
-                                    <th bgcolor="#f8f8f8">Assigned TA</th>
-                                    {% for ta in course.ta.all %}
-                                      <td colspan="1">{{ ta.full_name }}</td>
-                                      {% endfor %}
-                                      <!-- <th>#</th>
-                                      <th>Task</th>
-                                      <th>Hours</th>
-                                      <th>Assigned TA</th> -->
+                                    <th bgcolor="#f8f8f8">TA</th>
+                                    <th bgcolor="#f8f8f8">Assignments</th>
                                   </tr>
                               </thead>
                               <tbody>
-                                 <tr>
-                                      <th bgcolor="#f8f8f8">Assignments</th>
-                                      {% for assignment in course.get_assignments %}
-                                        {% for ta in course.ta.all %}
+
+                                     {% for ta in course.ta.all %}
+                                        <td>{{ta}}</td>
+                                        {% for assignment in course.get_assignments %}
                                             {% if ta.tid == assignment.tid.tid %}
-                                                <td> {{assignment.aname}}</td>
+                                                <td> {{assignment.aname}} : <br/>{{assignment.assigned_hours}} hours</td>
                                             {% endif%}
                                         {% endfor %}
+                                        <tr></tr>
                                       {% endfor %}
 
-                                  </tr>
-                                  <tr>
-                                      <th bgcolor="#f8f8f8">Assigned_hours</th>
-                                      {% for assignment in course.get_assignments %}
-                                        {% for ta in course.ta.all %}
-                                            {% if ta.tid == assignment.tid.tid %}
-                                                <td> {{assignment.assigned_hours}}</td>
-                                            {% endif%}
-                                        {% endfor %}
-                                      {% endfor %}
-                                  </tr>
+
+
                               </tbody>
                           </table>
                       </div>
