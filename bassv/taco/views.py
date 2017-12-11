@@ -7,6 +7,7 @@ from django.contrib.auth.models import User, Group
 from .forms import AddNewAssignmentForm
 from django.http import HttpResponse
 import json
+from django.shortcuts import redirect
 
 
 # def custom_login(request):
@@ -81,10 +82,7 @@ def addAssignment(request):
             assignment.tid = (Ta.objects.filter(full_name=request.POST.get('select_form')))[0]
             #assignment.tid = (Ta.objects.get(tid=request.POST.get('select_form')).tid)
             assignment.save()
-            return HttpResponse(
-                    json.dumps({'status': 'OK'}),
-                    content_type="application/json"
-                    )
+            return redirect('course-detail', request.POST.get('courseid'))
     else:
         form=AddNewAssignmentForm
     return HttpResponse(
