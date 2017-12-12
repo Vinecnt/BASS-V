@@ -84,7 +84,7 @@
                                         <td>{{ta}}</td>
                                         {% for assignment in course.get_assignments %}
                                             {% if ta.tid == assignment.tid.tid %}
-                                                <td> {{assignment.aname}} : <br/>{{assignment.assigned_hours}} hours</td>
+                                                <td> {{assignment.aname}}: <br/>{{assignment.assigned_hours}} hours</td>
                                             {% endif%}
                                         {% endfor %}
                                         <tr></tr>
@@ -125,7 +125,7 @@
                                         <td>{{ta}}</td>
                                         {% for assignment in course.get_assignments %}
                                             {% if ta.tid == assignment.tid.tid %}
-                                                <td> {{assignment.aname}} : <br/>{{assignment.assigned_hours}} hours</td>
+                                                <td> {{assignment.aname}}: <br/>{{assignment.assigned_hours}} hours</td>
                                             {% endif%}
                                         {% endfor %}
                                         <tr></tr>

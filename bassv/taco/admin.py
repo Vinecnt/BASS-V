@@ -1,20 +1,14 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Update, Course, AssignmentCommunication, Assignment, Ta, Professor, CourseOffering, CourseUpdate
+from .models import Update, Course, Assignment, Ta, Professor, CourseUpdate
 
-# admin.site.register(Message)
 # admin.site.register(Course)
 # admin.site.register(TA)
 # admin.site.register(Assignment)
-# admin.site.register(AssignmentCommunication)
 # admin.site.register(Professor)
-# admin.site.register(CourseOffering)
-# admin.site.register(MessageCommunication)
-
-
-
 # @admin.register(Update)
+
 # class UpdateAdmin(admin.ModelAdmin):
 #     list_display = ('uid','ustring')
 
@@ -30,20 +24,9 @@ class TaADmin(admin.ModelAdmin):
 class AssignmentAdmin(admin.ModelAdmin):
     list_display = ('aid','cid','aname')
 
-@admin.register(AssignmentCommunication)
-class AssignmentCommunicationAdmin(admin.ModelAdmin):
-    # list_display = ('aid','tid','pid')
-    pass
-
-
 @admin.register(Professor)
 class ProfessorAdmin(admin.ModelAdmin):
     list_display = ('pid','pname')
-
-@admin.register(CourseOffering)
-class CourseOfferingAdmin(admin.ModelAdmin):
-    # list_display = ('cid', 'cid')
-    pass
 
 
 @admin.register(CourseUpdate)

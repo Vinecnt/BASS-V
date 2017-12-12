@@ -16,15 +16,11 @@ class Assignment(models.Model):
     """
 	# unique id for each assignment
 	aid = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="Unique ID for the Assignment")
-	# for stroing the link to the place where the assignment is located.
-	# assignment_link = models.CharField(max_length=200, help_text="Enter the link to find the Assignment")
-	# foregin key to reference the course which the assifnment is for
+	tid = models.ForeignKey('TA', on_delete=models.SET_NULL, null=True)
 	cid = models.ForeignKey('Course', on_delete=models.SET_NULL, null=True)
 	# Assignment Name for referencing the assignment
 	aname = models.CharField(max_length=200, help_text="Enter a name for the Assignment")
 	assigned_hours = models.IntegerField(default=0, help_text="number of assigned hours")
-	#user = models.ForeignKey(User, default=1, limit_choices_to={"groups":1})
-	tid = models.ForeignKey('TA', on_delete=models.SET_NULL, null=True)
 
 
 	def __str__(self):
@@ -33,23 +29,6 @@ class Assignment(models.Model):
         Returns the name of the Assignment
         """
 		return self.aname
-
-	def get_assignments(self, cid_name):
-
-		return Assignment.objects.filter(cid=cid_name)
-
-
-
-
-class AssignmentCommunication(models.Model):
-	"""
-	making foreign keys for these
-	AssignID
-	TA ID
-	PROFESSOR ID
-	"""
-	aid = models.ForeignKey('Assignment', on_delete=models.SET_NULL, null=True)
-	# pid = models.ForeignKey('Professor', on_delete=models.SET_NULL, null=True)
 
 class Ta(models.Model):
 	# unique id for each assignment
@@ -79,13 +58,11 @@ class Ta(models.Model):
 
 
 class Course(models.Model):
-	# unique id for each assignment
 	cid = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="Unique ID for the Course")
-	cname = models.CharField(max_length=200, help_text="Enter Course Name")
-	cdescription=models.TextField(max_length=1000, help_text="Enter a brief description of the course")
 	professor=models.ForeignKey('Professor', on_delete=models.SET_NULL, null=True)
 	ta=models.ManyToManyField(Ta, help_text="Select a TA for this course")
-	#assignment = models.ManyToManyField(Assignment, help_text="pick an assignment for the course")
+	cname = models.CharField(max_length=200, help_text="Enter Course Name")
+	cdescription=models.TextField(max_length=1000, help_text="Enter a brief description of the course")
 
 	def get_absolute_url(self):
 		 return reverse('course-detail', args=[str(self.cid)])
@@ -109,7 +86,6 @@ class Course(models.Model):
 class Professor(models.Model):
 	pid = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="Unique ID for the Professor")
 	pname = models.CharField(max_length=200, help_text="Enter Professor's Name")
-	# courseOfferingID = models.ManyToManyField(Course, help_text="Select a course by this Professor")
 
 	def display_course(self):
 		"""
@@ -124,22 +100,6 @@ class Professor(models.Model):
         Returns the name of the professor and their unique ID.
         """
 		return '%s' % (self.pname)
-
-
-
-class CourseOffering(models.Model):
-	cid = models.ForeignKey('Course', on_delete=models.SET_NULL, null=True)
-	#tid = models.ForeignKey('TA', on_delete=models.SET_NULL, null=True)
-#	pid = models.ForeignKey('Professor', on_delete=models.SET_NULL, null=True)
-	def __str__(self):
-		"""
-        String for representing the Model object.
-        Returns the name of the professor and their unique ID.
-        """
-		return '%s' % (self.cid)
-
-
-
 
 
 class Update(models.Model):
